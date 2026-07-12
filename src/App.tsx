@@ -1,4 +1,11 @@
+import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import ProtectingRoute from './components/ProtectingRoute'
+import { Toaster } from 'react-hot-toast'
+
+import Login from './pages/login'
+import Dashboard from './pages/dashboard'
 import Home from './pages/Home'
 import Product from './pages/Product'
 import About from './pages/About'
@@ -7,7 +14,6 @@ import NotFound from './pages/NotFound'
 import Navbar from './components/Navbar/Navbar'
 // placeholder img
 import itemImg from "./assets/itemImg.jpeg";
-import { useState } from 'react'
 
 const Items = [
   {
@@ -71,6 +77,14 @@ const Items = [
 ]
 
 function App() {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 1000 * 60 * 5, // 5 minutes
+      },
+    },
+  });
+
   const [cartItems, setCartItems] = useState<any[]>(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')!) : []);
 
   const addToCart = (name: string, img: string, quantity: number) => {
@@ -94,18 +108,49 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <Navbar itemsCount={cartItems.length} />
-      <div className="bg-bg min-h-dvh w-full flex flex-col pt-18 px-2 md:px-4 lg:px-16">
-        <Routes>
-          <Route path="/" element={<Home Items={Items} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/product/:id" element={<Product items={Items} addToCart={addToCart} />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Navbar itemsCount={cartItems.length} />
+        <Toaster
+          position="top-center"
+          gutter={10}
+          containerStyle={{ top: 70 }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+              style: {
+                background: "#16a34a",
+                color: "#fff",
+              },
+            },
+            error: {
+              duration: 5000,
+              style: {
+                background: "#dc2626",
+                color: "#fff",
+              },
+            },
+            style: {
+              fontSize: "16px",
+              maxWidth: "500px",
+              padding: "16px 24px",
+              borderRadius: "8px",
+            },
+          }}
+        />
+        <div className="bg-bg min-h-dvh w-full flex flex-col pt-18 px-2 md:px-4 lg:px-16">
+          <Routes>
+            <Route path="/" element={<Home Items={Items} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/product/:id" element={<Product items={Items} addToCart={addToCart} />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<ProtectingRoute><Dashboard /></ProtectingRoute>} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </QueryClientProvider>
   )
 }
 
