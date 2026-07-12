@@ -1,6 +1,42 @@
-import Divider from "../components/Divider"
+import { useState, useEffect } from "react";
+import { useDebounce } from "use-debounce";
+import Divider from "../components/Divider";
+import SearchArea from "../components/SearchArea";
+import Section from "../components/Section";
 
-const Home = () => {
+const Home = ( { Items }: { Items: any[] } ) => {
+    // rendering arr
+    const [renderArr, setRenderArr] = useState<typeof Items>(Items);
+    // filtering states
+    const [searchQuery, setSearchQuery] = useState("");
+    const [selectedTag, setSelectedTag] = useState<string | null>(null);
+    //loading state
+    const [isLoading, setIsLoading] = useState(false);
+    // Debounce the search query & selected tag to avoid excessive filtering on every keystroke (saves calls and improves performance)
+    const [debouncedSearchQuery] = useDebounce(searchQuery, 500);
+    const [debouncedSelectedTag] = useDebounce(selectedTag, 300);
+
+    useEffect(()=>{
+        // set loading state to true whenever searchQuery or selectedTag changes
+        setIsLoading(true);
+    }, [searchQuery, selectedTag]);
+
+    useEffect(() => {
+        // Filter the items based on the search query and selected tag
+        const fetchFilteredData = () => {
+            const filtered = Items.filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase());
+                const matchesTag = debouncedSelectedTag ? item.sec_id === debouncedSelectedTag.toLowerCase() : true;
+                return matchesSearch && matchesTag;
+            });
+            // Update the renderArr state with the filtered items
+            setRenderArr(filtered);
+            setIsLoading(false); // Data has arrived, drop the loading screen
+        };
+
+        fetchFilteredData(); // call the function to filter data based on search query and selected tag
+    }, [debouncedSearchQuery, debouncedSelectedTag]);
+
     return (
         <>
             <div className="flex flex-col items-center justify-center py-8 font-default gap-8 ">
@@ -11,8 +47,20 @@ const Home = () => {
                     Antiques, collectibles, and vintage treasures await you in our curated collection. Explore the rich history and timeless beauty of the past, all in one place.
                 </p>
             </div>
+
+            {/* Pass the state control down to the SearchArea */}
+            <SearchArea
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                selectedTag={selectedTag}
+                setSelectedTag={setSelectedTag}
+            />
+
+            <Divider />
+            <Section secName="Recommended" secItems={renderArr} isLoading={isLoading} />
+            <Section secName="Products" secItems={renderArr} isLoading={isLoading} />
         </>
     )
 }
 
-export default Home
+export default Home;

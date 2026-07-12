@@ -1,17 +1,107 @@
 @import "tailwindcss";
-@import "@fontsource/cinzel"; /* Default text font */
-@import "@fontsource/cinzel-decorative"; /* Headers font */
+@import "@fontsource/cinzel"; /* main font */
+@import "@fontsource/cinzel-decorative"; /* header font */
 @import "@fontsource/amiri"; /* Arabic font */
-@import "@fontsource/raleway"; /* Description font */
+@import "@fontsource/raleway"; /* description font */
+@import "@fontsource-variable/inter"; /* Shadcn required font */
+
+/* shadcn base imports */
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+:root {
+  --background: #0d0b08;
+  --foreground: #f2ead8;
+  
+  --card: #0d0b08;
+  --card-foreground: #f2ead8;
+  
+  --popover: #0d0b08;
+  --popover-foreground: #f2ead8;
+
+  --primary: #c9a227; 
+  --primary-foreground: #0d0b08;
+  
+  --secondary: #1a1610;
+  --secondary-foreground: #f2ead8;
+  
+  --muted: #1a1610;
+  --muted-foreground: #a39c8e;
+  
+  --accent: #c9a227;
+  --accent-foreground: #0d0b08;
+  
+  --destructive: oklch(0.577 0.245 27.325);
+  
+  --border: #c9a22733;
+  --input: #c9a22733;
+  --ring: #c9a227;
+  
+  --radius: 0.625rem;
+}
 
 @theme {
-    /* Colors */
-    --color-bg: #0d0b08;
-    --color-text: #f2ead8;
-    --color-accent: #c9a227;
-    /* Font Families */
-    --font-default: "Cinzel", serif;
-    --font-header: "Cinzel Decorative", serif;
-    --font-arabic: "Amiri", serif;
-    --font-description: "Raleway", sans-serif;
+  --color-bg: #0d0b08;
+  --color-text: #f2ead8;
+  --color-accent: #c9a227;
+  
+  --font-default: "Cinzel", serif;
+  --font-header: "Cinzel Decorative", serif;
+  --font-arabic: "Amiri", serif;
+  --font-description: "Raleway", sans-serif;
+
+  /* Shadcn Required Aliases */
+  --font-sans: 'Inter Variable', sans-serif;
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  
+  --color-accent-shadcn: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  /* Shadcn Radius Variables */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+#root {
+  height: 100dvh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* scroll bar customization */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 6px;
 }
