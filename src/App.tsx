@@ -3,13 +3,13 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Cart from './pages/Cart'
 import NotFound from './pages/NotFound'
-import Header from './components/Header'
+import Navbar from './components/Navbar/Navbar'
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
-      <div className="p-4">
+      <Navbar />
+      <div className="p-4 bg-bg min-h-screen w-full">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

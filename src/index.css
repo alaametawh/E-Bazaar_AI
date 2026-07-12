@@ -1,1 +1,17 @@
 @import "tailwindcss";
+@import "@fontsource/cinzel"; /* Default text font */
+@import "@fontsource/cinzel-decorative"; /* Headers font */
+@import "@fontsource/amiri"; /* Arabic font */
+@import "@fontsource/raleway"; /* Description font */
+
+@theme {
+    /* Colors */
+    --color-bg: #0d0b08;
+    --color-text: #f2ead8;
+    --color-accent: #c9a227;
+    /* Font Families */
+    --font-default: "Cinzel", serif;
+    --font-header: "Cinzel Decorative", serif;
+    --font-arabic: "Amiri", serif;
+    --font-description: "Raleway", sans-serif;
+}
