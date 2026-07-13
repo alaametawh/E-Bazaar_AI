@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ProtectingRoute from './components/ProtectingRoute'
 import { Toaster } from 'react-hot-toast'
-
+import {toast} from "react-hot-toast";
+// pages
 import Login from './pages/login'
 import Dashboard from './pages/dashboard'
 import Home from './pages/Home'
@@ -13,7 +14,7 @@ import Cart from './pages/Cart'
 import NotFound from './pages/NotFound'
 import Navbar from './components/Navbar/Navbar'
 // placeholder img
-import itemImg from "./assets/itemImg.jpeg";
+import itemImg from "./assets/itemImg.jpeg"
 
 const Items = [
   {
@@ -87,7 +88,7 @@ function App() {
 
   const [cartItems, setCartItems] = useState<any[]>(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')!) : []);
 
-  const addToCart = (name: string, img: string, quantity: number) => {
+  const addToCart = (id: number, name: string, img: string, quantity: number, price: number) => {
     setCartItems(prevItems => {
       const itemExists = prevItems.some(item => item.name === name);
 
@@ -98,13 +99,12 @@ function App() {
           item.name === name ? { ...item, quantity: item.quantity + quantity } : item
         );
       } else {
-        updatedItems = [...prevItems, { name, img, quantity }];
+        updatedItems = [...prevItems, { id, name, img, quantity, price }];
       }
-
       localStorage.setItem('cartItems', JSON.stringify(updatedItems));
-
       return updatedItems;
     });
+    toast.success(`${name} added to cart!`);
   };
 
   return (
@@ -140,9 +140,9 @@ function App() {
         />
         <div className="bg-bg min-h-dvh w-full flex flex-col pt-18 px-2 md:px-4 lg:px-16">
           <Routes>
-            <Route path="/" element={<Home Items={Items} />} />
+            <Route path="/" element={<Home Items={Items} addToCart={addToCart} />} />
             <Route path="/about" element={<About />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
             <Route path="/product/:id" element={<Product items={Items} addToCart={addToCart} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<ProtectingRoute><Dashboard /></ProtectingRoute>} />

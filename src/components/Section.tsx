@@ -13,7 +13,7 @@ interface item {
     sales: number;
 }
 
-const Section = ({ secName, secItems, isLoading }: { secName: string; secItems: item[]; isLoading: boolean }) => {
+const Section = ({ secName, secItems, isLoading, addToCart }: { secName: string; secItems: item[]; isLoading: boolean; addToCart: (id: number, name: string, img: string, quantity: number, price: number) => void }) => {
     // Create a reference to the scrollable container div
     const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -69,7 +69,7 @@ const Section = ({ secName, secItems, isLoading }: { secName: string; secItems: 
                             ))}
                         </div>
                     ) : (secItems.length > 0 ? secItems.map((item) => (
-                        <ItemCard key={item.id} item={item} />
+                        <ItemCard key={item.id} item={item} addToCart={addToCart} />
                     )) : (
                         <p className="text-text/70 text-sm sm:text-base tracking-wide grid place-items-center w-full">
                             No items found

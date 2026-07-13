@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { Plus, Minus } from "lucide-react";
+import Footer from "@/components/Footer";
 
 
-const Product = ({ items, addToCart }: { items: any; addToCart: (name: string, img: string, quantity: number) => void }) => {
+const Product = ({ items, addToCart }: { items: any; addToCart: (id: number, name: string, img: string, quantity: number, price: number) => void }) => {
     const { id } = useParams<{ id: string }>();
     const product = items.find((item: any) => String(item.id) === id);
     const [count, setCount] = useState<number>(1);
@@ -58,10 +59,11 @@ const Product = ({ items, addToCart }: { items: any; addToCart: (name: string, i
                                 <span className="text-text/70 text-sm">{count}</span>
                                 <Plus className="cursor-pointer" size={24} onClick={incrementCount} />
                             </div>
-                            <button className="flex-5 bg-accent text-bg font-semibold py-2 px-4 rounded-lg hover:bg-accent/80 transition-colors duration-300 cursor-pointer" onClick={() => addToCart(product.name, product.imageurl, count)}>Add to Cart</button>
+                            <button className="flex-5 bg-accent text-bg font-semibold py-2 px-4 rounded-lg hover:bg-accent/80 transition-colors duration-300 cursor-pointer" onClick={() => addToCart(product.id, product.name, product.imageurl, count, product.price)}>Add to Cart</button>
                         </div>
                     </div>
                 </div>
+                <Footer />
             </>
         ) : (
             <Navigate to="/404" replace />
