@@ -14,6 +14,9 @@ import NotFound from './pages/NotFound'
 import Navbar from './components/Navbar/Navbar'
 // placeholder img
 import itemImg from "./assets/itemImg.jpeg";
+import DashIndex from './pages/DashIndex'
+import OrdersManage from './pages/OrdersManage'
+import ProductsManage from './pages/ProductsManage'
 
 const Items = [
   {
@@ -76,6 +79,12 @@ const Items = [
   }
 ]
 
+interface CartItem {
+  name: string
+  img: string
+  quantity: number
+}
+
 function App() {
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -85,7 +94,7 @@ function App() {
     },
   });
 
-  const [cartItems, setCartItems] = useState<any[]>(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')!) : []);
+  const [cartItems, setCartItems] = useState<CartItem[]>(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')!) : []);
 
   const addToCart = (name: string, img: string, quantity: number) => {
     setCartItems(prevItems => {
@@ -145,7 +154,12 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/product/:id" element={<Product items={Items} addToCart={addToCart} />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<ProtectingRoute><Dashboard /></ProtectingRoute>} />
+            <Route path="/dashboard" element={<ProtectingRoute><Dashboard /></ProtectingRoute>} >
+              <Route index element={<DashIndex/>} />
+              <Route path='admin' element={<DashIndex/>} />
+              <Route path='productsManage' element={<ProductsManage/>} />
+              <Route path='ordersManage' element={<OrdersManage/>} />
+            </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
