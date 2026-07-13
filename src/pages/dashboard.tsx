@@ -12,7 +12,7 @@ export default function Dashboard() {
             <div className=" border-b-2 py-4.5 px-3 flex flex-row justify-between items-center">
                 <div className="flex flex-col">
                     <h2 className="text-2xl mb-1 font-bold text-accent">Dashboard</h2>
-                    <p>Welcome to your dashboard!</p>
+                    <p className='text-xs sm:text-lg'>Welcome to your dashboard!</p>
                 </div>
                 <button onClick={() => {
                         logout()

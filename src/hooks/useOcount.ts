@@ -12,6 +12,7 @@ export default function useOcount() {
     });
 
     return {
+        data: data?.data,
         count: data?.count ?? 0,
         error,
         isLoading,

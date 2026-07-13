@@ -15,6 +15,9 @@ import NotFound from './pages/NotFound'
 import Navbar from './components/Navbar/Navbar'
 // placeholder img
 import itemImg from "./assets/itemImg.jpeg";
+import DashIndex from './pages/DashIndex'
+import ProductsManage from './pages/ProductsManage'
+import OrdersManage from './pages/OrdersManage'
 
 const Items = [
   {
