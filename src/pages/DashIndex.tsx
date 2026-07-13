@@ -20,7 +20,7 @@ export default function DashIndex(){
                 <div className=" border-2 bg-[#292825] hover:bg-[#33322f] border-accent p-6 w-full lg:w-1/4 rounded-2xl flex flex-row justify-between items-center">
                     <div className="flex flex-row gap-1">
                         <h3 className="text-lg font-semibold">Orders:</h3>
-                        <p className="text-xl font-bold">{Ocount}</p>
+                        <p className="text-xl text-accent font-bold">{Ocount}</p>
                     </div>
                     <div className=" border-2 p-3 border-accent rounded-2xl bg-background"><ShoppingCart className="w-6 h-6" /></div>
                 </div>
@@ -28,7 +28,7 @@ export default function DashIndex(){
                 <div className=" border-2 bg-[#292825] hover:bg-[#33322f] border-accent p-6 w-full lg:w-1/4 rounded-2xl flex flex-row justify-between items-center ">
                     <div className="flex flex-row gap-1">
                         <h3 className="text-lg font-semibold">Categories:</h3>
-                        <p className="text-xl font-bold">{Ccount}</p>
+                        <p className="text-xl text-accent font-bold">{Ccount}</p>
                     </div>
                     <div className=" border-2 p-3 border-accent rounded-2xl bg-background"><PackageSearch className="w-6 h-6" /></div>
                 </div>
@@ -36,7 +36,7 @@ export default function DashIndex(){
                 <div className=" border-2 bg-[#292825] hover:bg-[#33322f] border-accent p-6 w-full lg:w-1/4 rounded-2xl flex flex-row justify-between items-center ">
                     <div className="flex flex-row gap-1">
                         <h3 className="text-lg font-semibold">Products:</h3>
-                        <p className="text-xl font-bold">{Pcount}</p>
+                        <p className="text-xl text-accent font-bold">{Pcount}</p>
                     </div>
                     <div className=" border-2 p-3 border-accent rounded-2xl bg-background"><Package className="w-6 h-6" /></div>
                 </div>
@@ -44,7 +44,7 @@ export default function DashIndex(){
                 <div className=" border-2 bg-[#292825] hover:bg-[#33322f] border-accent p-6 w-full lg:w-1/4 rounded-2xl flex flex-row justify-between items-center">
                     <div className="flex flex-row gap-1">
                         <h3 className="text-lg font-semibold">Sales:</h3>
-                        <p className="text-xl font-bold">0</p>
+                        <p className="text-xl text-accent font-bold">0</p>
                     </div>
                     <div className=" border-2 p-3 border-accent rounded-2xl bg-background"><DollarSign className="w-6 h-6" /></div>
                 </div>
