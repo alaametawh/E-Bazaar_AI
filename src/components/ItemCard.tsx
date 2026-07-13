@@ -13,7 +13,7 @@ interface item {
   sales: number;
 }
 
-const ItemCard = ({ item }: { item: item }) => {
+const ItemCard = ({ item, addToCart }: { item: item; addToCart: (id: number, name: string, img: string, quantity: number, price: number) => void }) => {
   const navigate = useNavigate();
   
   return (
@@ -38,7 +38,10 @@ const ItemCard = ({ item }: { item: item }) => {
         <Divider />
         <div className="flex items-center justify-between px-2">
           <p className="text-accent font-bold mt-auto">${item.price.toFixed(2)}</p>
-          < ShoppingCart className="cursor-pointer text-accent" size={20} />
+          < ShoppingCart className="cursor-pointer text-accent" size={20} onClick={(e) => {
+            e.stopPropagation();
+            addToCart(item.id, item.name, item.imageurl, 1, item.price);
+          }} />
         </div>
 
       </div>

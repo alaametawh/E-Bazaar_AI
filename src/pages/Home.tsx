@@ -3,8 +3,9 @@ import { useDebounce } from "use-debounce";
 import Divider from "../components/Divider";
 import SearchArea from "../components/SearchArea";
 import Section from "../components/Section";
+import Footer from "@/components/Footer";
 
-const Home = ( { Items }: { Items: any[] } ) => {
+const Home = ( { Items, addToCart }: { Items: any[]; addToCart: (id: number, name: string, img: string, quantity: number, price: number) => void } ) => {
     // rendering arr
     const [renderArr, setRenderArr] = useState<typeof Items>(Items);
     // filtering states
@@ -57,8 +58,9 @@ const Home = ( { Items }: { Items: any[] } ) => {
             />
 
             <Divider />
-            <Section secName="Recommended" secItems={renderArr} isLoading={isLoading} />
-            <Section secName="Products" secItems={renderArr} isLoading={isLoading} />
+            <Section secName="Recommended" secItems={renderArr} isLoading={isLoading} addToCart={addToCart} />
+            <Section secName="Products" secItems={renderArr} isLoading={isLoading} addToCart={addToCart} />
+            <Footer />
         </>
     )
 }
