@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
 import ProtectingRoute from './components/ProtectingRoute'
 import { Toaster } from 'react-hot-toast'
 import {toast} from "react-hot-toast";
@@ -87,14 +87,6 @@ interface CartItem {
 }
 
 function App() {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 1000 * 60 * 5, // 5 minutes
-      },
-    },
-  });
-
   const [cartItems, setCartItems] = useState<CartItem[]>(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')!) : []);
 
   const addToCart = (id: number, name: string, img: string, quantity: number, price: number) => {
@@ -117,7 +109,6 @@ function App() {
   };
 
   return (
-    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Navbar itemsCount={cartItems.length} />
         <Toaster
@@ -164,7 +155,6 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
-    </QueryClientProvider>
   )
 }
 
