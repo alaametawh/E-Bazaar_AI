@@ -5,6 +5,7 @@ import SearchArea from "../components/SearchArea";
 import Section from "../components/Section";
 import Footer from "@/components/Footer";
 import usePcount from "@/hooks/usePcount";
+import { getAiRecommendations } from "@/services/aiService";
 
 const Home = ({ addToCart }: { addToCart: (id: number, name: string, img_url: string, quantity: number, price: number) => void }) => {
     // fetching items
@@ -18,22 +19,42 @@ const Home = ({ addToCart }: { addToCart: (id: number, name: string, img_url: st
     // Debounce the search query & selected tag to avoid excessive filtering on every keystroke (saves calls and improves performance)
     const [debouncedSearchQuery] = useDebounce(searchQuery, 500);
     const [debouncedSelectedTag] = useDebounce(selectedTag, 300);
+    // AI Recommendations
+    const [aiRecommendations, setAiRecommendations] = useState<any[]>([]);
+    const [aiLoading, setAiLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+        const fetchAiRecommendations = async () => {
+            setAiLoading(true);
+            try {
+                const recommendedItems = await getAiRecommendations(Items, 3);
+                setAiRecommendations(recommendedItems);
+            } catch (error) {
+                console.error("Error fetching AI recommendations:", error);
+            } finally {
+                setAiLoading(false);
+            }
+        };
+        
+        if(Items && Items.length > 0) {
+        fetchAiRecommendations();
+        }
+    }, [Items]);
 
     useEffect(() => {
         setLoading(true);
-    }, [searchQuery, selectedTag, ]);
+    }, [searchQuery, selectedTag,]);
 
     useEffect(() => {
         const filtered = Items.filter(item => {
             const matchesSearch = item.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase());
-            const matchesTag = debouncedSelectedTag ? item.sec_id === debouncedSelectedTag.toLowerCase() : true;
+            const matchesTag = debouncedSelectedTag ? String(item.sec_id) === String(debouncedSelectedTag) : true;
             return matchesSearch && matchesTag;
         });
 
         setRenderArr(filtered);
         setLoading(false);
     }, [Items, debouncedSearchQuery, debouncedSelectedTag]);
-
     return (
         <>
             <div className="flex flex-col items-center justify-center py-8 font-default gap-8 ">
@@ -53,6 +74,8 @@ const Home = ({ addToCart }: { addToCart: (id: number, name: string, img_url: st
                 setSelectedTag={setSelectedTag}
             />
 
+            <Divider />
+            <Section secName="AI Recommendations" secItems={aiRecommendations} isLoading={aiLoading} Loading={Loading} addToCart={addToCart} />
             <Divider />
             <Section secName="Recommended" secItems={renderArr} isLoading={isLoading} Loading={Loading} addToCart={addToCart} />
             <Section secName="Products" secItems={renderArr} isLoading={isLoading} Loading={Loading} addToCart={addToCart} />

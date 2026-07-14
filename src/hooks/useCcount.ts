@@ -1,7 +1,7 @@
 import { getCategoryCount } from "@/services/apiCategories";
 import { useQuery } from "@tanstack/react-query";
 
-export default function usePcount() {
+export default function useCcount() {
     const {
         data,
         error,

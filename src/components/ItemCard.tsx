@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import { ShoppingCart } from 'lucide-react'
 import Divider from './Divider'
-import usePcount from '@/hooks/useCcount';
+import useCcount from '@/hooks/useCcount';
 import { useEffect, useState } from 'react';
 import { Skeleton } from './ui/skeleton';
 
@@ -18,7 +18,7 @@ interface item {
 
 const ItemCard = ({ item, addToCart }: { item: item; addToCart: (id: number, name: string, img_url: string, quantity: number, price: number) => void }) => {
   const navigate = useNavigate();
-  const { data } = usePcount();
+  const { data } = useCcount();
   const [categories, setCategories] = useState(data || []);
 
   useEffect(() => {
