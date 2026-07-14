@@ -76,7 +76,6 @@ const Home = ({ addToCart }: { addToCart: (id: number, name: string, img_url: st
 
             <Divider />
             <Section secName="AI Recommendations" secItems={aiRecommendations} isLoading={aiLoading} Loading={Loading} addToCart={addToCart} />
-            <Divider />
             <Section secName="Recommended" secItems={renderArr} isLoading={isLoading} Loading={Loading} addToCart={addToCart} />
             <Section secName="Products" secItems={renderArr} isLoading={isLoading} Loading={Loading} addToCart={addToCart} />
             <Footer />
