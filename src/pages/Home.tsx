@@ -36,7 +36,7 @@ const Home = ({ addToCart }: { addToCart: (id: number, name: string, img_url: st
             }
         };
         
-        if(Items && Items.length > 0) {
+        if(Items.length > 0) {
         fetchAiRecommendations();
         }
     }, [Items]);

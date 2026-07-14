@@ -9,8 +9,9 @@ const ai = new GoogleGenAI({ apiKey: apiKey || "" });
 // 2. Upgraded to the new 2026 Gemini 3.5 & 3.1 model lineup
 const AI_MODELS = [
     "gemini-3.5-flash",
-    "gemini-3.1-flash",
-    "gemini-2.5-flash"
+    "gemini-3.1-flash-lite",
+    "gemini-3-flash-preview",
+    "gemini-2.5-flash",
 ];
 
 // Your exact interface remains untouched for UI stability
