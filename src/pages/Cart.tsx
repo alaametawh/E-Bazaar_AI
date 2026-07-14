@@ -26,7 +26,7 @@ const Cart = ({ cartItems, setCartItems }: { cartItems: any[]; setCartItems: Rea
             <div className="py-4 w-full max-h-[60vh] flex-1 flex flex-col items-center gap-2 overflow-y-scroll scrollbar-none">
                 {cartItems.length > 0 ? (
                     cartItems.map((item, index) => (
-                        <CartCard key={index} id={item.id} name={item.name} price={item.price} image={item.img} quantity={item.quantity} handleRemoveFromCart={handleRemoveFromCart} />
+                        <CartCard key={index} id={item.id} name={item.name} price={item.price} image={item.img_url} quantity={item.quantity} handleRemoveFromCart={handleRemoveFromCart} />
                     ))
                 ) : (
                     <div className="text-text/70 text-sm sm:text-base font-default tracking-wide flex items-center justify-center flex-col gap-4 h-[40vh] w-full">

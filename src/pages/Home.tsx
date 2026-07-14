@@ -4,39 +4,35 @@ import Divider from "../components/Divider";
 import SearchArea from "../components/SearchArea";
 import Section from "../components/Section";
 import Footer from "@/components/Footer";
+import usePcount from "@/hooks/usePcount";
 
-const Home = ( { Items, addToCart }: { Items: any[]; addToCart: (id: number, name: string, img: string, quantity: number, price: number) => void } ) => {
+const Home = ({ addToCart }: { addToCart: (id: number, name: string, img_url: string, quantity: number, price: number) => void }) => {
+    // fetching items
+    const { data: Items = [], isLoading } = usePcount();
+    const [Loading, setLoading] = useState<boolean>(isLoading);
     // rendering arr
-    const [renderArr, setRenderArr] = useState<typeof Items>(Items);
+    const [renderArr, setRenderArr] = useState<any[]>([]);
     // filtering states
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedTag, setSelectedTag] = useState<string | null>(null);
-    //loading state
-    const [isLoading, setIsLoading] = useState(false);
     // Debounce the search query & selected tag to avoid excessive filtering on every keystroke (saves calls and improves performance)
     const [debouncedSearchQuery] = useDebounce(searchQuery, 500);
     const [debouncedSelectedTag] = useDebounce(selectedTag, 300);
 
-    useEffect(()=>{
-        // set loading state to true whenever searchQuery or selectedTag changes
-        setIsLoading(true);
-    }, [searchQuery, selectedTag]);
+    useEffect(() => {
+        setLoading(true);
+    }, [searchQuery, selectedTag, ]);
 
     useEffect(() => {
-        // Filter the items based on the search query and selected tag
-        const fetchFilteredData = () => {
-            const filtered = Items.filter(item => {
-                const matchesSearch = item.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase());
-                const matchesTag = debouncedSelectedTag ? item.sec_id === debouncedSelectedTag.toLowerCase() : true;
-                return matchesSearch && matchesTag;
-            });
-            // Update the renderArr state with the filtered items
-            setRenderArr(filtered);
-            setIsLoading(false); // Data has arrived, drop the loading screen
-        };
+        const filtered = Items.filter(item => {
+            const matchesSearch = item.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase());
+            const matchesTag = debouncedSelectedTag ? item.sec_id === debouncedSelectedTag.toLowerCase() : true;
+            return matchesSearch && matchesTag;
+        });
 
-        fetchFilteredData(); // call the function to filter data based on search query and selected tag
-    }, [debouncedSearchQuery, debouncedSelectedTag]);
+        setRenderArr(filtered);
+        setLoading(false);
+    }, [Items, debouncedSearchQuery, debouncedSelectedTag]);
 
     return (
         <>
@@ -58,8 +54,8 @@ const Home = ( { Items, addToCart }: { Items: any[]; addToCart: (id: number, nam
             />
 
             <Divider />
-            <Section secName="Recommended" secItems={renderArr} isLoading={isLoading} addToCart={addToCart} />
-            <Section secName="Products" secItems={renderArr} isLoading={isLoading} addToCart={addToCart} />
+            <Section secName="Recommended" secItems={renderArr} isLoading={isLoading} Loading={Loading} addToCart={addToCart} />
+            <Section secName="Products" secItems={renderArr} isLoading={isLoading} Loading={Loading} addToCart={addToCart} />
             <Footer />
         </>
     )

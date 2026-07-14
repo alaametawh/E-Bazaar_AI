@@ -2,9 +2,18 @@ import { useEffect, useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { Plus, Minus } from "lucide-react";
 import Footer from "@/components/Footer";
+import usePcount from "@/hooks/usePcount";
 
 
-const Product = ({ items, addToCart }: { items: any; addToCart: (id: number, name: string, img: string, quantity: number, price: number) => void }) => {
+const Product = ({ addToCart }: { addToCart: (id: number, name: string, img: string, quantity: number, price: number) => void }) => {
+    // defaul items
+    const { data } = usePcount();
+    const [items, setItems] = useState(data || []);
+
+    useEffect(() => {
+        setItems(data || []);
+    }, [data]);
+
     const { id } = useParams<{ id: string }>();
     const product = items.find((item: any) => String(item.id) === id);
     const [count, setCount] = useState<number>(1);
@@ -37,12 +46,12 @@ const Product = ({ items, addToCart }: { items: any; addToCart: (id: number, nam
         product ? (
             <>
                 <div className={`${inPreview ? "grid" : "hidden"} cursor-pointer fixed top-0 left-0 z-100 w-dvw h-dvh place-items-center overflow-hidden bg-accent/30 backdrop-blur-md`} onClick={() => setInPreview(false)}>
-                    <img src={product.imageurl} alt={product.name} className="max-w-screen max-h-screen object-center object-contain rounded-lg" />
+                    <img src={product.img_url} alt={product.name} className="max-w-screen max-h-screen object-center object-contain rounded-lg" />
                 </div>
 
                 <div className="w-full h-full flex-1 flex flex-col justify-center gap-4 p-4">
                     <div className="w-full h-full overflow-hidden grid place-items-center rounded-lg group">
-                        <img src={product.imageurl} alt={product.name} onClick={() => setInPreview(true)} className="cursor-pointer w-full max-h-[70dvh] object-cover object-center rounded-lg group-hover:scale-105 transition-transform duration-300" />
+                        <img src={product.img_url} alt={product.name} onClick={() => setInPreview(true)} className="cursor-pointer w-full max-h-[70dvh] object-cover object-center rounded-lg group-hover:scale-105 transition-transform duration-300" />
                     </div>
 
                     <div className=" w-full flex flex-col p-2">
@@ -59,7 +68,7 @@ const Product = ({ items, addToCart }: { items: any; addToCart: (id: number, nam
                                 <span className="text-text/70 text-sm">{count}</span>
                                 <Plus className="cursor-pointer" size={24} onClick={incrementCount} />
                             </div>
-                            <button className="flex-5 bg-accent text-bg font-semibold py-2 px-4 rounded-lg hover:bg-accent/80 transition-colors duration-300 cursor-pointer" onClick={() => addToCart(product.id, product.name, product.imageurl, count, product.price)}>Add to Cart</button>
+                            <button className="flex-5 bg-accent text-bg font-semibold py-2 px-4 rounded-lg hover:bg-accent/80 transition-colors duration-300 cursor-pointer" onClick={() => addToCart(product.id, product.name, product.img_url, count, product.price)}>Add to Cart</button>
                         </div>
                     </div>
                 </div>

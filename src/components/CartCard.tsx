@@ -1,4 +1,3 @@
-import React from 'react'
 import { Trash2 } from 'lucide-react'
 
 const CartCard = ({ id, name, price, image, quantity, handleRemoveFromCart }: { id: number; name: string; price: number; image: string; quantity: number; handleRemoveFromCart: (id: number, name: string) => void }) => {

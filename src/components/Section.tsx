@@ -3,17 +3,17 @@ import ItemCard from './ItemCard'
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface item {
-    id: number;
-    name: string;
-    year: number;
     description: string;
+    id: number;
+    img_url: string;
+    name: string;
     price: number;
-    imageurl: string;
-    sec_id: string;
     sales: number;
+    sec_id: string;
+    year: number;
 }
 
-const Section = ({ secName, secItems, isLoading, addToCart }: { secName: string; secItems: item[]; isLoading: boolean; addToCart: (id: number, name: string, img: string, quantity: number, price: number) => void }) => {
+const Section = ({ secName, secItems, isLoading, Loading, addToCart }: { secName: string; secItems: item[]; isLoading: boolean; Loading: boolean; addToCart: (id: number, name: string, img_url: string, quantity: number, price: number) => void }) => {
     // Create a reference to the scrollable container div
     const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -62,7 +62,7 @@ const Section = ({ secName, secItems, isLoading, addToCart }: { secName: string;
                     onMouseMove={handleMouseMove}
                     className="flex gap-4 overflow-x-auto w-full min-h-32 h-max scrollbar-none cursor-grab [box-shadow:inset_0_0_10px_#00000020] rounded-lg p-2 scroll-smooth-none mask-[linear-gradient(to_right,transparent,black_6%,black_96%,transparent)]"
                 >
-                    {isLoading ? (
+                    {(isLoading || Loading) ? (
                         <div className="flex gap-4">
                             {[...Array(Math.max(4, Math.floor(window.innerWidth / 250)))].map((_, i) => (
                                 <Skeleton key={i} className="w-64 h-75" />
