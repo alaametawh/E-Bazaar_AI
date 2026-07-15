@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 const PurchaseForm = ({ isOpen, setIsOpen, cartItems, setCartItems, total }: { isOpen: boolean; setIsOpen: React.Dispatch<React.SetStateAction<boolean>>; cartItems: any[]; setCartItems: React.Dispatch<React.SetStateAction<any[]>>; total: number }) => {
     const [userData, setUserData] = useState({
         name: '',
-        email: '',
+        number: '',
         address: ''
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -15,7 +15,7 @@ const PurchaseForm = ({ isOpen, setIsOpen, cartItems, setCartItems, total }: { i
         e.preventDefault();
         
         // Validatation
-        const validationError = validateForm(userData.name, userData.email, userData.address);
+        const validationError = validateForm(userData.name, userData.number, userData.address);
         if (validationError !== true) {
             toast.error(validationError as string);
             return;
@@ -62,8 +62,8 @@ const PurchaseForm = ({ isOpen, setIsOpen, cartItems, setCartItems, total }: { i
                         <input onChange={(e) => setUserData({ ...userData, name: e.target.value })} value={userData.name} type="text" id="name" name="name" placeholder="Enter your name" className="font-default w-full px-4 py-2 rounded-md border border-accent/30 focus:outline-none focus:ring-2 focus:ring-accent/50" />
                     </div>
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="email" className="text-sm md:text-base font-bold text-text font-default">Email</label>
-                        <input onChange={(e) => setUserData({ ...userData, email: e.target.value })} value={userData.email} type="email" id="email" name="email" placeholder="Enter your email" className="font-default w-full px-4 py-2 rounded-md border border-accent/30 focus:outline-none focus:ring-2 focus:ring-accent/50" />
+                        <label htmlFor="number" className="text-sm md:text-base font-bold text-text font-default">Phone Number</label>
+                        <input onChange={(e) => setUserData({ ...userData, number: e.target.value })} value={userData.number} type="text" id="number" name="number" placeholder="Enter your phone number" className="font-default w-full px-4 py-2 rounded-md border border-accent/30 focus:outline-none focus:ring-2 focus:ring-accent/50" />
                     </div>
                     <div className="flex flex-col gap-2">
                         <label htmlFor="address" className="text-sm md:text-base font-bold text-text font-default">Address</label>

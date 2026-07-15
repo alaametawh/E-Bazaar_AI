@@ -1,14 +1,14 @@
-const validateForm = (name: string, email: string, address: string) => {
-    if(!name || !email || !address) {
+const validateForm = (name: string, number: string, address: string) => {
+    if(!name || !number || !address) {
         return 'Please fill in all fields';
     }
 
     const NameRegex = /^[a-zA-Z\s]+$/; // Allows only letters and spaces
-    const EmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email format validation
+    const NumberRegex = /^(010|011|012)\d{8}$/; // Allows only numbers that start with 010, 011, or 012
     const AddressRegex = /^[a-zA-Z0-9\s,'-]*$/; // Allows letters, numbers, spaces, commas, apostrophes, and hyphens
     const Errors = [
         !NameRegex.test(name) ? 'Wrong Name format' : true,
-        !EmailRegex.test(email) ? 'Wrong Email format' : true,
+        !NumberRegex.test(number) ? 'Wrong Phone Number format' : true,
         !AddressRegex.test(address) ? 'Wrong Address format' : true
     ]
     const result = Errors.find(error => error !== true);
