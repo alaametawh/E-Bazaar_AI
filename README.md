@@ -120,19 +120,6 @@ npm run dev
 
 ---
 
-Example:
-
-```
-screenshots/
-├── home.png
-├── products.png
-├── cart.png
-├── dashboard.png
-└── login.png
-```
-
----
-
 ## 🌟 Future Improvements
 
 - Wishlist
