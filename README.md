@@ -193,6 +193,7 @@ This project is licensed under the MIT License.
 ## 👨‍💻 Author
 
 **Nour Alboursh**
+**Alaaeldin Metawh**
 
 Frontend Developer
 
