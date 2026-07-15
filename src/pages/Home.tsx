@@ -27,7 +27,7 @@ const Home = ({ addToCart }: { addToCart: (id: number, name: string, img_url: st
         const fetchAiRecommendations = async () => {
             setAiLoading(true);
             try {
-                const recommendedItems = await getAiRecommendations(Items, 3);
+                const recommendedItems = await getAiRecommendations(Items, 5);
                 setAiRecommendations(recommendedItems);
             } catch (error) {
                 console.error("Error fetching AI recommendations:", error);
@@ -76,7 +76,7 @@ const Home = ({ addToCart }: { addToCart: (id: number, name: string, img_url: st
 
             <Divider />
             <Section secName="AI Recommendations" secItems={aiRecommendations} isLoading={aiLoading} Loading={Loading} addToCart={addToCart} />
-            <Section secName="Recommended" secItems={renderArr} isLoading={isLoading} Loading={Loading} addToCart={addToCart} />
+            <Section secName="Best Selling" secItems={[...renderArr].sort((a, b) => b.sales - a.sales)} isLoading={isLoading} Loading={Loading} addToCart={addToCart} />
             <Section secName="Products" secItems={renderArr} isLoading={isLoading} Loading={Loading} addToCart={addToCart} />
             <Footer />
         </>
