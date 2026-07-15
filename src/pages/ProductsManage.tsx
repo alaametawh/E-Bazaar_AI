@@ -142,7 +142,7 @@ function AddNewProductPopup({
     setisform,
     }: AddNewProductPopupProps) {
 
-    const {register, handleSubmit, formState: {errors}} = useForm<NewProduct>();
+    const {register, handleSubmit, formState: {errors},reset} = useForm<NewProduct>();
     const mutate = useAddProduct()
 
 
@@ -152,6 +152,7 @@ function AddNewProductPopup({
             setisform(false);
         },
         });
+        reset()
     }
 
 
@@ -262,7 +263,7 @@ function AddNewCategoryPopup({
     setisCform,
     }: AddNewCategoryPopupProps) {
 
-    const {register, handleSubmit, formState: {errors}} = useForm<NewCategory>();
+    const {register, handleSubmit, formState: {errors},reset} = useForm<NewCategory>();
     const mutate = useAddCategory()
 
 
@@ -272,6 +273,7 @@ function AddNewCategoryPopup({
             setisCform(false);
         },
         });
+        reset()
     }
 
 
