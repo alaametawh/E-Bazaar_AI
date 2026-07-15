@@ -30,7 +30,7 @@ const ItemCard = ({ item, addToCart }: { item: item; addToCart: (id: number, nam
     onClick={() => navigate(`/product/${item.id}`)}
     className="flex flex-col w-50 md:62.5 lg:w-75 bg-accent/10 rounded-lg p-2 lg:p-4 shadow-md hover:shadow-lg transition-shadow duration-300 shrink-0 group h-[stretch]">
       {/* image */}
-      <div className="max-w-full mb-4 overflow-hidden rounded-lg relative">
+      <div className="max-w-full mb-4 overflow-hidden rounded-lg relative pointer-events-none">
         <img src={item.img_url} alt={item.name} className="w-full object-cover object-center origin-center aspect-square rounded-lg group-hover:scale-105 transition-transform duration-300" />
         <p className="text-text text-sm font-light absolute top-1 left-1 min-w-max w-1/3 text-center bg-bg border-2 border-accent p-1 rounded-lg">
           {item.year}
