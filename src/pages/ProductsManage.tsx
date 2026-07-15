@@ -35,7 +35,7 @@ export default function OrdersManage(){
                 <button onClick={()=>setisproduct(true)} className={` cursor-pointer border-2 border-accent p-2 rounded w-full ${isproduct ? "bg-accent": "bg-[#33322f] text-text"}`}>Products</button>
             </div>
 
-            <div>
+            <div className='mb-7'>
                 {isproduct && 
                 <div className=' border-2 rounded-2xl border-gray-500 bg-[#21201e]'>
                     <div className=' flex flex-row text-text p-4 justify-between items-center'>

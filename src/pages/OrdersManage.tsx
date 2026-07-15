@@ -24,7 +24,7 @@ export default function ProductsManage() {
     if (isLoading) return <p className="text-white">Loading...</p>;
 
     return (
-        <div className="text-text">
+        <div className="text-text mb-7">
             <div className="mb-7 flex items-center justify-between">
                 <h2 className="text-xl font-bold">Orders Manage</h2>
 
