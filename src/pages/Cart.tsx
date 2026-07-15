@@ -3,8 +3,11 @@ import Divider from "@/components/Divider";
 import { ShoppingCart } from "lucide-react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import PurchaseForm from "@/components/PurchaseForm";
+import { useState } from "react";
 
 const Cart = ({ cartItems, setCartItems }: { cartItems: any[]; setCartItems: React.Dispatch<React.SetStateAction<any[]>> }) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
     const handleRemoveFromCart = (id: number, name: string) => {
@@ -45,10 +48,11 @@ const Cart = ({ cartItems, setCartItems }: { cartItems: any[]; setCartItems: Rea
                     Total : <span className="text-accent font-bold">${totalPrice.toFixed(2)}</span>
                 </p>
 
-                <button className="cursor-pointer w-full bg-accent text-bg font-default font-bold px-4 py-2 rounded-lg hover:bg-accent/80 transition-colors duration-300">
+                <button className={`${cartItems.length === 0 ? 'cursor-not-allowed' : 'cursor-pointer'} w-full bg-accent text-bg font-default font-bold px-4 py-2 rounded-lg hover:bg-accent/80 transition-colors duration-300`} onClick={() => setIsOpen(true)} disabled={cartItems.length === 0}>
                     Checkout
                 </button>
             </div>
+            <PurchaseForm isOpen={isOpen} setIsOpen={setIsOpen} cartItems={cartItems} setCartItems={setCartItems} total={totalPrice} />
         </>
     )
 }
