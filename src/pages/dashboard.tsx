@@ -9,7 +9,7 @@ export default function Dashboard() {
 
     return (
         <div className=" font-default flex flex-col">
-            <div className=" border-b-2 py-4.5 px-3 flex flex-row justify-between items-center">
+            <div className=" border-b-2 border-accent py-4.5 px-3 flex flex-row justify-between items-center">
                 <div className="flex flex-col">
                     <h2 className="text-2xl mb-1 font-bold text-accent">Dashboard</h2>
                     <p className='text-xs sm:text-lg'>Welcome to your dashboard!</p>
@@ -24,7 +24,7 @@ export default function Dashboard() {
                 </button>
             </div>
 
-            <div className='mt-7'>
+            <div className='mt-7 mx-3'>
                 <Outlet/>
             </div>
         </div>
