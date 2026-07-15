@@ -109,6 +109,7 @@ Create a `.env` file:
 ```env
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_anon_key
+VITE_GEMINI_API_KEY=your key
 ```
 
 ### Start the development server
@@ -118,10 +119,6 @@ npm run dev
 ```
 
 ---
-
-## 📸 Screenshots
-
-Add screenshots here.
 
 Example:
 
