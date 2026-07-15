@@ -42,7 +42,7 @@ const ItemCard = ({ item, addToCart }: { item: item; addToCart: (id: number, nam
       {/* name */}
       <h3 className="md:text-lg font-semibold text-text mb-4">{item.name}</h3>
       {/* description */}
-      <p className="text-xs md:text-sm font-description text-text/70 mb-4">{item.description}</p>
+      <p className="text-xs md:text-sm font-description text-text/70 mb-4 truncate max-h-20">{item.description}</p>
       {/* price and cart button */}
       <div className="mt-auto">
         <Divider />
