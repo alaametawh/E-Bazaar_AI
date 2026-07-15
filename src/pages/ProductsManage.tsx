@@ -40,7 +40,7 @@ export default function OrdersManage(){
                 <div className=' border-2 rounded-2xl border-gray-500 bg-[#21201e]'>
                     <div className=' flex flex-row text-text p-4 justify-between items-center'>
                         <h2 className=' text-xl font-bold'>Products</h2>
-                        <button onClick={()=> setisform(true)}  className={` flex flex-row justify-between items-center gap-2 border hover:bg-accent/85 p-2 rounded text-black font-bold cursor-pointer bg-accent`}><Plus className='w-5 h-5'/> new product </button>
+                        <button onClick={()=> setisform(true)}  className={` flex flex-row justify-between text-xs sm:text-lg items-center gap-2 border hover:bg-accent/85 p-2 rounded text-black font-bold cursor-pointer bg-accent`}><Plus className='w-5 h-5'/> new product </button>
                     </div>
                     <ReusableTable data={Pdata ?? []} columns={[
                         {
@@ -82,7 +82,7 @@ export default function OrdersManage(){
                 <div className=' border-2 rounded-2xl border-gray-500 bg-[#21201e]'>
                     <div className=' flex flex-row text-text p-4 justify-between items-center'>
                         <h2 className=' text-xl font-bold'>Categories</h2>
-                        <button onClick={()=> setisCform(true)}  className={` flex flex-row justify-between items-center gap-2 border hover:bg-accent/85 p-2 rounded text-black font-bold cursor-pointer bg-accent`}><Plus className='w-5 h-5'/> new Category </button>
+                        <button onClick={()=> setisCform(true)}  className={` flex flex-row text-xs sm:text-lg justify-between items-center gap-2 border hover:bg-accent/85 p-2 rounded text-black font-bold cursor-pointer bg-accent`}><Plus className='w-5 h-5'/> new Category </button>
                     </div>
                     <ReusableTable data={Cdata ?? []} columns={[
                         {
@@ -115,10 +115,6 @@ export default function OrdersManage(){
         </div>
     )
 }
-
-
-
-
 
 
 

@@ -17,10 +17,10 @@ export default function Login() {
     }
 
     return (
-        <div className=" font-default text-text flex flex-col justify-center items-center min-h-[calc(100vh-100px)]">
+        <div className=" font-default text-text flex flex-col justify-center items-center h-svh">
             <h1 className="text-4xl text-accent font-bold mb-3">E-Bazaar</h1>
-            <p className=" text-text/60 font-bold text-sm mb-6">E-Bazaar Management System - Employee Login</p>
-            <form className="bg-[#292825] p-6 rounded-2xl border border-accent w-110" onSubmit={handleSubmit(onSubmit)}>
+            <p className=" text-text/60 font-bold text-sm mb-6 text-center">E-Bazaar Management System - Employee Login</p>
+            <form className="bg-[#292825] w-3/4 sm:w-100 p-6 rounded-2xl border border-accent" onSubmit={handleSubmit(onSubmit)}>
 
                 <div className="mb-4 flex flex-col gap-2">
                     <label htmlFor="email"> <span className="flex items-center mb-1"> <Mail className="inline-block mr-2" /> Email </span></label>
