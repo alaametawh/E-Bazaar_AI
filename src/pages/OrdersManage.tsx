@@ -113,7 +113,7 @@ function OrderInfo({
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-        <div className="w-[90%] max-w-lg rounded-2xl border border-zinc-700 bg-zinc-900 p-6 shadow-2xl">
+        <div className=" max-h-160 overflow-y-scroll w-[90%] max-w-lg rounded-2xl border border-zinc-700 bg-zinc-900 p-6 shadow-2xl">
             <div className="mb-5 flex items-center justify-between">
                 <h2 className="text-xl font-bold text-white">
                     Order Details
