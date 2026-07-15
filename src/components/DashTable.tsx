@@ -20,9 +20,9 @@ export default function ReusableTable<T extends object>({
         <table className=" overflow-x-scroll min-w-full text-sm text-zinc-200">
             <thead className="bg-zinc-800">
             <tr>
-                {columns.map((column) => (
+                {columns.map((column,index) => (
                 <th
-                    key={String(column.accessor)}
+                    key={index}
                     className="border-b border-zinc-700 px-6 py-4 text-left font-semibold text-zinc-100"
                 >
                     {column.header}
@@ -37,9 +37,9 @@ export default function ReusableTable<T extends object>({
                 key={rowIndex}
                 className="border-b border-zinc-800 transition-colors hover:bg-zinc-800/70"
                 >
-                {columns.map((column) => (
+                {columns.map((column,index) => (
                     <td
-                    key={String(column.accessor)}
+                    key={index}
                     className="px-6 py-4 text-zinc-300"
                     >
                     {column.render
