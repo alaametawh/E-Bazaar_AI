@@ -51,7 +51,12 @@ const Home = ({ addToCart }: { addToCart: (id: number, name: string, img_url: st
             const matchesTag = debouncedSelectedTag ? String(item.sec_id) === String(debouncedSelectedTag) : true;
             return matchesSearch && matchesTag;
         });
-
+        const filteredAI = aiRecommendations.filter(item => {
+            const matchesSearch = item.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase());
+            const matchesTag = debouncedSelectedTag ? String(item.sec_id) === String(debouncedSelectedTag) : true;
+            return matchesSearch && matchesTag;
+        });
+        setAiRecommendations(filteredAI);
         setRenderArr(filtered);
         setLoading(false);
     }, [Items, debouncedSearchQuery, debouncedSelectedTag]);
